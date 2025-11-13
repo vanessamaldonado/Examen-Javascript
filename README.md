@@ -8,19 +8,18 @@
 Completa todos los **// TODO:** del archivo app.js proporcionado para que el proyecto funcione correctamente.
 
 Funcionalidades mínimas requeridas:
-    - Crear y gestionar un array de gastos con los campos incluidos en el formulario del fichero HTML:
-        - Concepto del gasto
-        - Fecha del gasto
-        - Importe (€)
-        - Categoría (alimentación, transporte, ocio, otros)
-
-    - Permitir agregar, editar y eliminar registros correctamente.
-    - Validar los campos antes de registrar un gasto:
-        - Ningún campo del formulario puede quedar vacío.
-        - La fecha  del gasto no puede ser una fecha futura (mayor al día actual).
-    - Mostrar el listado de gastos ordenado por fecha más reciente.
-    - Calcular y mostrar el total gastado actualizado tras las distintas operaciones permitidas (agregar, editar y eliminar).
-    - Mostrar mensajes de confirmación o error en pantalla.
+- Crear y gestionar un array de gastos con los campos incluidos en el formulario del fichero HTML:
+    - Concepto del gasto
+    - Fecha del gasto
+    - Importe (€)
+    - Categoría (alimentación, transporte, ocio, otros)
+- Permitir agregar, editar y eliminar registros correctamente.
+- Validar los campos antes de registrar un gasto:
+    - Ningún campo del formulario puede quedar vacío.
+    - La fecha  del gasto no puede ser una fecha futura (mayor al día actual).
+- Mostrar el listado de gastos ordenado por fecha más reciente.
+- Calcular y mostrar el total gastado actualizado tras las distintas operaciones permitidas (agregar, editar y eliminar).
+- Mostrar mensajes de confirmación o error en pantalla.
 
 ---
 
@@ -37,5 +36,4 @@ Añadir e implementar la funcionalidad de un botón que borre los valores que ha
 
 ## Botón “Eliminar todos los gastos” con pregunta de confirmación (MAX 2 punto)
 Añadir e implementar la funcionalidad de un botón que borre todos los gastos dados de alta.
-Antes de eliminar, se deberá mostra un alert pidiendo confirmación al usuario Ejem: "¿Seguro que quieres borrar todos los gastos?",
-si el usuario confirma, se procederá a eliminar todos los gastos de la lista.
+Antes de eliminar, se deberá mostra un alert pidiendo confirmación al usuario Ejem: "¿Seguro que quieres borrar todos los gastos?", si el usuario confirma, se procederá a eliminar todos los gastos de la lista.
