@@ -1,64 +1,94 @@
 // === Elementos del DOM ===
  // TODO: Crear constantes para manejar tus elementos del DOM
-
+const form = document.getElementById('formGasto');
+const listaGasto = document.getElementById('listaGastos');
 // Campos del formulario
- // TODO: Crear constantes para manejar tus elementos del formulario
+const concepto = document.getElementById('concepto');
+const fecha = document.getElementById('fecha');
+const importe = document.getElementById('importe');
+const categoria = document.getElementById('categoria');
+
+const totalGastado = document.getElementById('total');
+const botonGuardar = document.querySelector('button[type="submit"]');
 
 // === Clase GestorGastos ===
 class GestorGastos {
   constructor() {
-    // TODO: Crear array para guardar los gastos
-    // TODO: Variable para gasto en edición
+    this.gastos = [];
+    this.editarGasto= null;
   }
 
   // --- Agregar gasto ---
   agregar(gasto) {
-    // TODO: Añadir gasto al array
-    // TODO: Ordenar por fecha
-    // TODO: Mostrar lista y actualizar total
-    // TODO: Mostrar mensaje de éxito
+    this.gastos.push(gasto);
+    this.ordenar();
+    this.mostrar()
+    this.calcularTotal();
+    this.mostrarMensaje('Gasto añadido.','ok');
   }
 
   // --- Eliminar gasto ---
   eliminar(id) {
-    // TODO: Filtrar el array para eliminar el gasto
-    // TODO: Mostrar lista actualizada
-    // TODO: Actualizar total y mostrar mensaje
+    this.gastos = this.gastos.filter(gasto =>gasto.id !== id);
+    this.mostrar()
+    this.calcularTotal();
+    this.mostrarMensaje('Gasto eliminado.','ok');
   }
 
   // --- Editar gasto ---
   editar(id) {
-    // TODO: Buscar gasto con ese id
-    // TODO: Rellenar el formulario con sus datos
-    // TODO: Cambiar texto del botón a "Guardar cambios"
+    const gasto = this.gastos.find(i => i.id === id);
+
+    console.log(concepto.value);
+    
+    concepto.value = gasto.concepto;
+    fecha.value = gasto.fecha;
+    importe.value = gasto.importe;
+    categoria.value = gasto.categoria;
+
+    this.editarGasto = gasto;
+    botonGuardar.textContent = 'Guardar cambios';
   }
 
   // --- Guardar cambios ---
   guardarEdicion() {
-    // TODO: Actualizar los datos del gasto editado
-    // TODO: Reordenar, mostrar y recalcular total
-    // TODO: Mostrar mensaje de éxito
-    // TODO: Resetear formulario y volver a modo "nuevo"
+    if(!this.editarGasto) return;
+
+    this.editarGasto.concepto = concepto.value.trim();
+    this.editarGasto.fecha = fecha.value;
+    this.editarGasto.importe = Number(importe.value);
+    this.editarGasto.categoria = categoria.value.trim();
+     
+    this.ordenar();
+    this.mostrar();
+    this.calcularTotal();
+    this.mostrarMensaje('Elemento actualizado correctamente', 'ok');
+
+    this.editarGasto = null;
+    form.reset();
+
+    botonGuardar.textContent = 'Guardar';
   }
 
   // --- Calcular total gastado ---
   calcularTotal() {
-    // TODO: Sumar los importes del array
-    // TODO: Mostrar el total en pantalla con 2 decimales como máximo si hubiera
+    const gastado = this.gastos.reduce((total, gasto)=>total + Number(gasto.importe),0);
+    totalGastado.innerHTML = gastado;
+    console.log(gastado);
   }
 
   // --- Ordenar por fecha ---
   ordenar() {
-    // TODO: Ordenar el array por fecha del gasto más reciente
+    this.gastos.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
   }
 
   // --- Mostrar lista de gastos ---
    mostrar() {
-    lista.innerHTML = '';
+    listaGasto.innerHTML = '';
     if (this.gastos.length === 0) {
       const li = document.createElement('li');
       li.textContent = 'No hay gastos registrados';
-      lista.appendChild(li);
+      listaGasto.appendChild(li);
       return;
     }
 
@@ -83,8 +113,9 @@ class GestorGastos {
 
       li.querySelector('.editar').addEventListener('click', () => this.editar(g.id));
       li.querySelector('.eliminar').addEventListener('click', () => this.eliminar(g.id));
-
-      lista.appendChild(li);
+      
+      listaGasto.appendChild(li);
+      gestor.calcularTotal();
     });
   }
 
@@ -105,18 +136,29 @@ form.addEventListener('submit', e => {
   e.preventDefault();
 
   // --- Validaciones ---
-  // TODO: Comprobar campos vacíos. Ningún campo del formulario puede quedar vacío.
-  // TODO: Validar que la fecha no sea futura
+   if (!concepto.value.trim() || !importe.value.trim() || !fecha.value || !categoria.value) {
+    gestor.mostrarMensaje('Por favor, completa todos los campos', false);
+    return;
+  }
+  const seleccion = new Date(fecha.value);
+  if (seleccion >= new Date()) {
+    gestor.mostrarMensaje('No puedes elegir una fecha pasada', 'error');
+    return;
+  }
 
   // --- Si se está editando ---
-  // TODO: Llamar a edicion y salir
-
-  // --- Crear objeto gasto ---
-  const nuevoGasto = {
-    id: Date.now(),
-    // TODO: Añadir propiedades: concepto, fecha, importe, categoria
-  };
-
-  // TODO: Llamar a gestor.agregar(nuevoGasto)
-  // TODO: Resetear formulario
+  if (gestor.editarGasto) {
+    gestor.guardarEdicion();
+  } else {
+    const nuevo = {
+      id: Date.now(),
+      concepto: concepto.value.trim(),
+      fecha: fecha.value,
+      importe: Number(importe.value),
+      categoria: categoria.value.trim()
+    };
+    gestor.agregar(nuevo);
+    form.reset();
+  }
+  concepto.focus();
 });
