@@ -3,7 +3,7 @@
 ## Duración: 
 2 horas
 
-## Implementación de Funcionalidades mínimas para manejar el formulario (MAX 5 puntos)
+## PARTE 1: Implementación de Funcionalidades mínimas para manejar el formulario (MAX 5 puntos)
 
 Completa todos los **// TODO:** del archivo app.js proporcionado para que el proyecto funcione correctamente.
 
@@ -38,3 +38,32 @@ Añadir e implementar la funcionalidad de un botón que borre los valores que ha
 Añadir e implementar la funcionalidad de un botón que borre todos los gastos dados de alta.
 Antes de eliminar, se deberá mostra un alert pidiendo confirmación al usuario Ejem: "¿Seguro que quieres borrar todos los gastos?", si el usuario confirma, se procederá a eliminar todos los gastos de la lista.
 
+---
+### ⚠️ **IMPORTANTE: ERRORES JAVASCRIPT**
+
+Previo a la entrega, cada alumno debe comprobar la consola del navegador y asegurarse de que:
+
+👉 **NO existe ningún error JavaScript en consola**
+
+Se penalizará cualquier error de tipo:
+
+- **ReferenceError**
+- **SyntaxError**
+- **TypeError**
+- **Valores `undefined` inesperados**
+- **Fallos en eventos o en el DOM**
+
+> Aunque la funcionalidad parezca funcionar,  
+> la presencia de errores en consola implica pérdida de puntuación,  
+> ya que indica falta de control, falta de pruebas o mal uso del DOM.
+
+### ⭐ Valoración positiva adicional
+Se tendrá en cuenta cualquier iniciativa que mejore:
+
+- la claridad del código
+- su organización
+- la limpieza o la indentación
+- comentarios explicativos
+- nombres de variables significativos
+- uso adecuado del DOM y arrays
+- soluciones creativas sin romper la plantilla y la estructura del proyecto
